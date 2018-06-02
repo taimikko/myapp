@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 // ladataan passport jotta sitä voidaan käyttää tässä tiedostossa
-var passport = require('passport')
+var passport = require('passport');
 
 // ladataan tietokanta mallit
 var Vastaus = require('../models/model.js').Vastaus;
@@ -19,6 +19,9 @@ router.get('/', ensureLoggedIn('/login'), function (req, res, next) {
     res.render('index');
 });
 
+router.get('/supersankari', ensureLoggedIn('/login'), function (req, res, next) {
+    res.render('index');
+});
 
 router.post('/supersankari', ensureLoggedIn('/login'), function (req, res) {
 //router.post('/supersankari', function(req, res){
@@ -34,7 +37,7 @@ router.post('/supersankari', ensureLoggedIn('/login'), function (req, res) {
         function () {
             res.status(500).send("Tietokantavirhe");
         });
-})
+});
 
 
 router.get("/vastaukset", ensureLoggedIn('/login'), function (req, res) {
@@ -49,7 +52,7 @@ router.get("/vastaukset", ensureLoggedIn('/login'), function (req, res) {
 
 router.get('/register', function (req, res) {
     res.render('register');
-})
+});
 
 router.post('/register', function (req, res) {
 
@@ -65,11 +68,11 @@ router.post('/register', function (req, res) {
         function () {
             res.status(500).send("Tietokantavirhe");
         });
-})
+});
 
 router.get('/login', function (req, res) {
     res.render('login');
-})
+});
 
 // Autentikoidutaan passportin avulla jonka konfiguraatio on määritetty app.js:ssä
 router.post('/login', passport.authenticate('local',
@@ -77,7 +80,7 @@ router.post('/login', passport.authenticate('local',
         successReturnToOrRedirect: '/',
         failureRedirect: '/login',
         failureFlash: true
-    }))
+    }));
 
 router.get('/logout', function (req, res) {
     req.logout();
