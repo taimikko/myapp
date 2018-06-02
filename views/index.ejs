@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
+
+<body>
+<form action="/supersankari" method="POST">
+  <input type="text" name="nimi" placeholder="Oma nimi">
+  <br>
+  <input id="sankari1" type="radio" name="supersankari" value="Superhessu">
+  <label for="sankari1">Superhessu</label>
+  <br>
+  <input id="sankari2" type="radio" name="supersankari" value="Saturnustyttö">
+  <label for="sankari2">Saturnustyttö</label>
+  <br>
+  <input id="sankari3" type="radio" name="supersankari" value="Petopoika">
+  <label for="sankari3">Petopoika</label>
+  <br>
+  <input type="submit" value="Lähetä">
+</form>
+
+<% if(locals.nimi) { %>
+<p>Moi, <%= nimi %>! Suosikkisupersankarisi on siis
+  <%= supersankari %>. Selvä.</p>
+<% } %>
+
+</body>
+
+</html>

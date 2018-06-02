@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+  </head>
+
+  <body>
+    <h1>Suosikki supersankari</h1>
+    <form action="/supersankari" method="POST">
+      <div class=kuka>
+		<label for="nimi-input" >Nimi:</label>
+		<input id="nimi-input" type="text" name="nimi" placeholder="Anna nimesi" class=nimi><br>
+	</div>
+	<dic class=valinta>
+		<input type="radio" name="supersankari" value="Batman">Batman<br>
+		<input type="radio" name="supersankari" value="Mustanaamio" checked>Mustanaamio<br>
+		<input type="radio" name="supersankari" value="Teräsmies">Teräsmies<br>
+		<input type="radio" name="supersankari" value="Superhessu">Superhessu <br>
+		</div>
+		<input type="submit" value="Lähetä" class=nappi>
+	</form>
+   </body>
+</html>
