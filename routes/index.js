@@ -14,17 +14,13 @@ var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 
 // kaikissa poluissa paitsi loginissa ja registerissä käytetään ensureLoggedIn middlewarea
 // joka pakottaa sisäänkirjautumaan
-router.get('/', ensureLoggedIn('/login'), function (req, res, next) {
-//router.get('/', function (req, res, next) {
+//router.get('/', ensureLoggedIn('/login'), function (req, res, next) {
+router.get('/', function (req, res, next) {
     res.render('index');
 });
 
-router.get('/supersankari', ensureLoggedIn('/login'), function (req, res, next) {
-    res.render('index');
-});
-
-router.post('/supersankari', ensureLoggedIn('/login'), function (req, res) {
-//router.post('/supersankari', function(req, res){
+//router.post('/supersankari', ensureLoggedIn('/login'), function (req, res) {
+router.post('/supersankari', function(req, res){
     var nimi = req.body.nimi;
     var supersankari = req.body.supersankari;
 
@@ -39,9 +35,8 @@ router.post('/supersankari', ensureLoggedIn('/login'), function (req, res) {
         });
 });
 
-
-router.get("/vastaukset", ensureLoggedIn('/login'), function (req, res) {
-//router.get("/vastaukset", function (req, res) {
+//router.get("/vastaukset", ensureLoggedIn('/login'), function (req, res) {
+router.get("/vastaukset", function (req, res) {
     Vastaus.find(function (err, vastaukset) {
         if (err) return console.error(err);
         console.log(vastaukset);
@@ -52,6 +47,12 @@ router.get("/vastaukset", ensureLoggedIn('/login'), function (req, res) {
 
 router.get('/register', function (req, res) {
     res.render('register');
+});
+
+
+//router.get('/supersankari', ensureLoggedIn('/login'), function (req, res, next) {
+router.get('/supersankari', function (req, res, next) {
+    res.render('index');
 });
 
 router.post('/register', function (req, res) {
