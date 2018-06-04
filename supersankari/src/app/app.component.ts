@@ -1,5 +1,6 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, ViewChild} from '@angular/core';
 import {DataService} from './services/data.service'
+import { TuloksetComponent } from './tulokset/tulokset.component';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import {DataService} from './services/data.service'
 
 export class AppComponent {
   title = 'app';
-
+  @ViewChild(TuloksetComponent)tulokset: TuloksetComponent;
   supersankari: string;
 
   onValmis($event) {
@@ -30,5 +31,15 @@ export class AppComponent {
   constructor(private dataService: DataService) {
   }
 
+  onValinta($event) {
+    this.sankariService.postSupersankari(
+      $event.nimi,
+      $event.sankari
+    ).then(() => {
+      this.supersankari = $event.supersankari;
+      this.tulokset.paivitaTulokset();
+    }).catch((err) => {
+      console.log(err);
+    });
 
 }

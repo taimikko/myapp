@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {DataService} from '../services/data.service'
 
 @Component({
   selector: 'app-tulokset',
@@ -10,9 +11,25 @@ import {Component, Input, OnInit} from '@angular/core';
 export class TuloksetComponent implements OnInit {
   @Input() supersankari;
 
-  constructor() { }
+  tuloslista: any[];
 
-  ngOnInit() {
+  constructor(private dataService: DataService) {
   }
 
-}
+  ngOnInit() {
+    this.paivitaTulokset();
+  }
+
+  public paivitaTulokset() {
+    this.dataService.haeTulokset().then((response) => {
+      this.asetaTulokset(response.json());
+    });
+  }
+
+  private asetaTulokset(tulokset) {
+    this.tuloslista = [];
+    for (let t in tulokset) {
+      this.tuloslista.push([t, tulokset[t]]);
+    }
+
+  }

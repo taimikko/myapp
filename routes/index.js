@@ -44,6 +44,19 @@ router.get("/vastaukset", function (req, res) {
     });
 });
 
+router.get("/tulokset", function (req, res) {
+    Vastaus.aggregate([{
+        $group: { _id: "$supersankari", arvo: {$sum: 1}}}]).then(function(data) {
+            var tulokset = {};
+            data.forEach(function(v) {
+                tulokset[v._id] = v.arvo;
+            });
+            res.json(tulokset);
+        },
+        function () {
+            res.status(500).send("Tietokantavirhe");
+        });
+});
 
 router.get('/register', function (req, res) {
     res.render('register');
