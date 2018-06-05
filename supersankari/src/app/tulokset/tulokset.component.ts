@@ -7,7 +7,6 @@ import {DataService} from '../services/data.service'
   styleUrls: ['./tulokset.component.css']
 })
 
-
 export class TuloksetComponent implements OnInit {
   @Input() supersankari;
 
@@ -22,14 +21,15 @@ export class TuloksetComponent implements OnInit {
 
   public paivitaTulokset() {
     this.dataService.haeTulokset().then((response) => {
-      this.asetaTulokset(response.json());
+      this.asetaTulokset(response);
     });
   }
 
   private asetaTulokset(tulokset) {
+    console.log(tulokset);
     this.tuloslista = [];  // tyhjentää tuloslistan
     for (let t in tulokset) {
       this.tuloslista.push([t, tulokset[t]]);
     }
-
   }
+}

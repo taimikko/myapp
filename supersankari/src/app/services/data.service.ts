@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 export class DataService {
   constructor(private http: HttpClient) { }
   public postSupersankari(nimi: string, supersankari: string): Promise<any> {
-    return this.http.post( '/supersankari',
+    return this.http.post( '/supersankari_json',
       {nimi: nimi, supersankari: supersankari}
     ).toPromise();
   }

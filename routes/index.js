@@ -35,6 +35,21 @@ router.post('/supersankari', function(req, res){
         });
 });
 
+router.post('/supersankari_json', function(req, res){
+    var nimi = req.body.nimi;
+    var supersankari = req.body.supersankari;
+
+    Vastaus.create({
+        nimi: nimi,
+        supersankari: supersankari
+    }).then(function () {
+            res.json({nimi: req.body.nimi, supersankari: req.body.supersankari})
+        },
+        function () {
+            res.status(500).send("Tietokantavirhe");
+        });
+});
+
 //router.get("/vastaukset", ensureLoggedIn('/login'), function (req, res) {
 router.get("/vastaukset", function (req, res) {
     Vastaus.find(function (err, vastaukset) {

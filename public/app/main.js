@@ -57,6 +57,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_data_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./services/data.service */ "./src/app/services/data.service.ts");
+/* harmony import */ var _tulokset_tulokset_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tulokset/tulokset.component */ "./src/app/tulokset/tulokset.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -68,20 +69,37 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var AppComponent = /** @class */ (function () {
     function AppComponent(dataService) {
         this.dataService = dataService;
         this.title = 'app';
     }
     AppComponent.prototype.onValmis = function ($event) {
+        var _this = this;
         this.supersankari = $event.supersankari;
         this.dataService.postSupersankari($event.nimi, $event.supersankari).then(function () {
             console.log("Tallennus onnistui");
+            _this.tulokset.paivitaTulokset(); //päivitä tulokset
         });
     };
     AppComponent.prototype.painallus = function () {
         this.title = this.title + '!';
     };
+    AppComponent.prototype.onValinta = function ($event) {
+        var _this = this;
+        this.dataService.postSupersankari($event.nimi, $event.sankari).then(function () {
+            // nuolisyntaksin kanssa this viittaa oikeaan paikkaan, käytä sitä!
+            _this.supersankari = $event.supersankari;
+            _this.tulokset.paivitaTulokset();
+        }).catch(function (err) {
+            console.log(err);
+        });
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])(_tulokset_tulokset_component__WEBPACK_IMPORTED_MODULE_2__["TuloksetComponent"]),
+        __metadata("design:type", _tulokset_tulokset_component__WEBPACK_IMPORTED_MODULE_2__["TuloksetComponent"])
+    ], AppComponent.prototype, "tulokset", void 0);
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-root',
@@ -260,7 +278,7 @@ var DataService = /** @class */ (function () {
         this.http = http;
     }
     DataService.prototype.postSupersankari = function (nimi, supersankari) {
-        return this.http.post('/supersankari', { nimi: nimi, supersankari: supersankari }).toPromise();
+        return this.http.post('/supersankari_json', { nimi: nimi, supersankari: supersankari }).toPromise();
     };
     DataService.prototype.haeTulokset = function () {
         return this.http.get('/tulokset').toPromise();
@@ -294,7 +312,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "Suosikkisupersankarisi on siis {{supersankari}}.\n"
+module.exports = "Suosikkisupersankarisi on siis {{supersankari}}.\n<ul>\n  <li *ngFor=\"let t of tuloslista\">\n    {{t[0]}}: {{t[1]}}\n  </li>\n</ul>\n"
 
 /***/ }),
 
@@ -309,6 +327,7 @@ module.exports = "Suosikkisupersankarisi on siis {{supersankari}}.\n"
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TuloksetComponent", function() { return TuloksetComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_data_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/data.service */ "./src/app/services/data.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -319,10 +338,26 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var TuloksetComponent = /** @class */ (function () {
-    function TuloksetComponent() {
+    function TuloksetComponent(dataService) {
+        this.dataService = dataService;
     }
     TuloksetComponent.prototype.ngOnInit = function () {
+        this.paivitaTulokset();
+    };
+    TuloksetComponent.prototype.paivitaTulokset = function () {
+        var _this = this;
+        this.dataService.haeTulokset().then(function (response) {
+            _this.asetaTulokset(response);
+        });
+    };
+    TuloksetComponent.prototype.asetaTulokset = function (tulokset) {
+        console.log(tulokset);
+        this.tuloslista = []; // tyhjentää tuloslistan
+        for (var t in tulokset) {
+            this.tuloslista.push([t, tulokset[t]]);
+        }
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
@@ -334,7 +369,7 @@ var TuloksetComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./tulokset.component.html */ "./src/app/tulokset/tulokset.component.html"),
             styles: [__webpack_require__(/*! ./tulokset.component.css */ "./src/app/tulokset/tulokset.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_services_data_service__WEBPACK_IMPORTED_MODULE_1__["DataService"]])
     ], TuloksetComponent);
     return TuloksetComponent;
 }());

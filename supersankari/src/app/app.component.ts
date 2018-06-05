@@ -1,6 +1,6 @@
 import {Component, Input, ViewChild} from '@angular/core';
 import {DataService} from './services/data.service'
-import { TuloksetComponent } from './tulokset/tulokset.component';
+import {TuloksetComponent} from './tulokset/tulokset.component';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,7 @@ import { TuloksetComponent } from './tulokset/tulokset.component';
 
 export class AppComponent {
   title = 'app';
-  @ViewChild(TuloksetComponent)tulokset: TuloksetComponent;
+  @ViewChild(TuloksetComponent) tulokset: TuloksetComponent;
   supersankari: string;
 
   onValmis($event) {
@@ -19,8 +19,9 @@ export class AppComponent {
     this.dataService.postSupersankari(
       $event.nimi,
       $event.supersankari
-    ).then(function () {
+    ).then(() => {
       console.log("Tallennus onnistui");
+      this.tulokset.paivitaTulokset(); //päivitä tulokset
     });
   }
 
@@ -32,14 +33,15 @@ export class AppComponent {
   }
 
   onValinta($event) {
-    this.sankariService.postSupersankari(
+    this.dataService.postSupersankari(
       $event.nimi,
       $event.sankari
     ).then(() => {
+      // nuolisyntaksin kanssa this viittaa oikeaan paikkaan, käytä sitä!
       this.supersankari = $event.supersankari;
       this.tulokset.paivitaTulokset();
     }).catch((err) => {
       console.log(err);
     });
-
+  }
 }
