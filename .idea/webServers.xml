@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="37179d6f-31a2-46e3-b14d-a03f52864d68" name="https://github.com/taimikko/myapp" url="http://github.com/taimikko/myapp">
-        <fileTransfer host="ftp://github.com" port="21" rootFolder="">
+        <fileTransfer host="//github.com" port="21">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>

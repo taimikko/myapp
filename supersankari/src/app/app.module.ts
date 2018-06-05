@@ -32,4 +32,5 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
   providers: [DataService],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
