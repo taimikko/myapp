@@ -657,14 +657,25 @@ var TuloksetComponent = /** @class */ (function () {
         }
         var newLabels = [];
         var newData = [];
-        for (var k in tulokset) {
-            newLabels.push(k);
-            newData.push(tulokset[k]);
+        // sortataaan aakkosjärjestykseen
+        var nimet = Object.keys(tulokset).sort(function (a, b) {
+            return tulokset[b] - tulokset[a];
+        });
+        // sortataan suosituimmuusjärjestykseen
+        var arvot = Object.keys(tulokset).sort(function (a, b) {
+            return tulokset[b] - tulokset[a];
+        }).map(function (key) { return tulokset[key]; });
+        for (var k in nimet) {
+            newLabels.push(nimet[k]);
+            newData.push(arvot[k]);
         }
         this.datasets = [
             { data: newData, label: "Suosikit" }
         ];
         this.labels = newLabels;
+        console.log("tulokset:", JSON.stringify(tulokset));
+        console.log("newLabels:", newLabels);
+        console.log("newData:", newData);
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),

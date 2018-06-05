@@ -30,7 +30,7 @@ export class TuloksetComponent implements OnInit {
 
   options = {
     maintainAspectRatio: false,
-    scales: { yAxes: [{ ticks: { beginAtZero: true } }] }
+    scales: {yAxes: [{ticks: {beginAtZero: true}}]}
   };
 
   private asetaTulokset(tulokset) {
@@ -40,15 +40,31 @@ export class TuloksetComponent implements OnInit {
       this.tuloslista.push([t, tulokset[t]]);
     }
 
-      let newLabels: string[] = [];
-      let newData: number[] = [];
-      for (let k in tulokset) {
-        newLabels.push(k);
-        newData.push(tulokset[k]);
-      }
-      this.datasets = [
-        {data: newData, label: "Suosikit"}
-      ];
-      this.labels = newLabels;
+    let newLabels: string[] = [];
+    let newData: number[] = [];
+    // sortataaan aakkosjärjestykseen
+    const nimet = Object.keys(tulokset).sort(function (a, b) {
+      return tulokset[b] - tulokset[a];
+    });
+
+    // sortataan suosituimmuusjärjestykseen
+    const arvot = Object.keys(tulokset).sort(function (a, b) {
+      return tulokset[b] - tulokset[a];
+    }).map(key => tulokset[key])
+
+    for (let k in nimet) {
+      newLabels.push(nimet[k]);
+      newData.push(arvot[k]);
+    }
+    this.datasets = [
+      {data: newData, label: "Suosikit"}
+    ];
+    this.labels = newLabels;
+
+    console.log("tulokset:" , JSON.stringify(tulokset));
+    console.log("newLabels:" , newLabels);
+    console.log("newData:" , newData);
+
   }
+
 }
