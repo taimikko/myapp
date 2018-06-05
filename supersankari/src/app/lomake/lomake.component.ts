@@ -11,6 +11,8 @@ export class LomakeComponent implements OnInit {
   nimi: string;
   supersankari: string;
   vaihtoehdot = [ "Superhessu", "Mustanaamio", "Teräsmies", "Batman" ];
+
+
   constructor() {
   }
 
@@ -26,5 +28,7 @@ export class LomakeComponent implements OnInit {
     console.log("Lomakkeen tiedot pitäis lähettää johonkin");
     console.log("Nimi:", this.nimi);
   }
+
+
 }
 

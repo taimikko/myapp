@@ -12,6 +12,7 @@ import {DataService} from "./services/data.service";
 import { MatButtonModule, MatInputModule, MatRadioModule, MatCardModule } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatButtonModule,
     MatInputModule,
     MatRadioModule,
-    MatCardModule
+    MatCardModule,
+    ChartsModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
