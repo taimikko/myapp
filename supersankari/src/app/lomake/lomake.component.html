@@ -1,5 +1,6 @@
 <form (submit)="laheta()">
   <h1>Suosikki supersankari</h1>
+  <p>lomake.component.html</p>
   <div class=kuka>
     <label for="nimi-input">Nimi:</label>
     <!--<input id="nimi-input" type="text" name="nimi" placeholder="Anna nimesi" class=nimi>-->
@@ -10,7 +11,8 @@
     <input [id]="v" type="radio" name="supersankari" [value]="v" [(ngModel)]="supersankari">
     <label [for]="v">{{v}}</label>
   </div>
-
-  <input type="submit" value="Lähetä" class=nappi>
+  <mat-card>
+    <button mat-button>Paina tästä napista</button>
+  </mat-card>
 </form>
 

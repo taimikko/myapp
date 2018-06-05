@@ -133,12 +133,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tulokset_tulokset_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./tulokset/tulokset.component */ "./src/app/tulokset/tulokset.component.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _services_data_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./services/data.service */ "./src/app/services/data.service.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -158,9 +162,14 @@ var AppModule = /** @class */ (function () {
                 _tulokset_tulokset_component__WEBPACK_IMPORTED_MODULE_5__["TuloksetComponent"]
             ],
             imports: [
-                _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpClientModule"],
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"]
+                _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"],
+                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_9__["BrowserAnimationsModule"],
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpClientModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatButtonModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatInputModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatRadioModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatCardModule"]
             ],
             providers: [_services_data_service__WEBPACK_IMPORTED_MODULE_7__["DataService"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
@@ -191,7 +200,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<form (submit)=\"laheta()\">\n  <h1>Suosikki supersankari</h1>\n  <div class=kuka>\n    <label for=\"nimi-input\">Nimi:</label>\n    <!--<input id=\"nimi-input\" type=\"text\" name=\"nimi\" placeholder=\"Anna nimesi\" class=nimi>-->\n    <input type=\"text\" name=\"nimi\" placeholder=\"Anna nimesi\" [(ngModel)]=\"nimi\">\n    <br>\n  </div>\n  <div *ngFor=\"let v of vaihtoehdot\">\n    <input [id]=\"v\" type=\"radio\" name=\"supersankari\" [value]=\"v\" [(ngModel)]=\"supersankari\">\n    <label [for]=\"v\">{{v}}</label>\n  </div>\n\n  <input type=\"submit\" value=\"Lähetä\" class=nappi>\n</form>\n\n"
+module.exports = "<form (submit)=\"laheta()\">\n  <h1>Suosikki supersankari</h1>\n  <p>lomake.component.html</p>\n  <div class=kuka>\n    <label for=\"nimi-input\">Nimi:</label>\n    <!--<input id=\"nimi-input\" type=\"text\" name=\"nimi\" placeholder=\"Anna nimesi\" class=nimi>-->\n    <input type=\"text\" name=\"nimi\" placeholder=\"Anna nimesi\" [(ngModel)]=\"nimi\">\n    <br>\n  </div>\n  <div *ngFor=\"let v of vaihtoehdot\">\n    <input [id]=\"v\" type=\"radio\" name=\"supersankari\" [value]=\"v\" [(ngModel)]=\"supersankari\">\n    <label [for]=\"v\">{{v}}</label>\n  </div>\n  <mat-card>\n    <button mat-button>Paina tästä napista</button>\n  </mat-card>\n</form>\n\n"
 
 /***/ }),
 

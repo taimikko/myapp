@@ -9,6 +9,9 @@ import { TuloksetComponent } from './tulokset/tulokset.component';
 import { FormsModule } from '@angular/forms';
 import {DataService} from "./services/data.service";
 
+import { MatButtonModule, MatInputModule, MatRadioModule, MatCardModule } from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -17,9 +20,14 @@ import {DataService} from "./services/data.service";
     TuloksetComponent
   ],
   imports: [
-    HttpClientModule,
     BrowserModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    MatButtonModule,
+    MatInputModule,
+    MatRadioModule,
+    MatCardModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
