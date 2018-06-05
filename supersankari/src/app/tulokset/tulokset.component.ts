@@ -27,7 +27,7 @@ export class TuloksetComponent implements OnInit {
   }
 
   private asetaTulokset(tulokset) {
-    this.tuloslista = [];
+    this.tuloslista = [];  // tyhjentää tuloslistan
     for (let t in tulokset) {
       this.tuloslista.push([t, tulokset[t]]);
     }

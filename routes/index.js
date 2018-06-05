@@ -46,6 +46,7 @@ router.get("/vastaukset", function (req, res) {
 
 router.get("/tulokset", function (req, res) {
     Vastaus.aggregate([{
+        //laskee montako kertaa mitäkin supersankaria on kannatettu
         $group: { _id: "$supersankari", arvo: {$sum: 1}}}]).then(function(data) {
             var tulokset = {};
             data.forEach(function(v) {
